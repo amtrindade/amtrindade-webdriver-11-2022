@@ -52,6 +52,7 @@ public class WebElementsTest {
 		
 		//Valida o resultado		
 		assertEquals("O nome deveria ser igual", "Antônio", valueExpected);		
+		//assertEquals("O nome deveria ser igual", "Antônio", tfName.getAttribute("value"));
 	}
 	
 	@Test
@@ -95,6 +96,32 @@ public class WebElementsTest {
 		assertFalse(listRadio.get(0).isSelected());
 		assertFalse(listRadio.get(1).isSelected());
 		assertFalse(listRadio.get(3).isSelected());		
+	}
+	
+	@Test
+	public void testCheckBox() throws InterruptedException {
+		List<WebElement> checkList = 
+				driver.findElements(By.xpath("//div[@id='box']//input[@type='checkbox']"));
+		
+		assertEquals(4, checkList.size());
+
+		//Forma simples
+		//checkList.get(2).click();
+		//checkList.get(3).click();
+		
+		//Forma com looping
+		for (WebElement el : checkList) {
+			//if com a condição OU
+			if ((el.getAttribute("value").equals("Check 3")) || 
+					(el.getAttribute("value").equals("Check 4"))) {
+				el.click();
+			}						
+		}
+	
+		assertFalse(checkList.get(0).isSelected());
+		assertFalse(checkList.get(1).isSelected());
+		assertTrue(checkList.get(2).isSelected());
+		assertTrue(checkList.get(3).isSelected());
 	}
 	
 }
