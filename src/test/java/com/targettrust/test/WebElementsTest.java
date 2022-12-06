@@ -99,15 +99,11 @@ public class WebElementsTest {
 	}
 	
 	@Test
-	public void testCheckBox() throws InterruptedException {
+	public void testCheckBoxLooping() throws InterruptedException {
 		List<WebElement> checkList = 
 				driver.findElements(By.xpath("//div[@id='box']//input[@type='checkbox']"));
 		
 		assertEquals(4, checkList.size());
-
-		//Forma simples
-		//checkList.get(2).click();
-		//checkList.get(3).click();
 		
 		//Forma com looping
 		for (WebElement el : checkList) {
@@ -117,6 +113,23 @@ public class WebElementsTest {
 				el.click();
 			}						
 		}
+	
+		assertFalse(checkList.get(0).isSelected());
+		assertFalse(checkList.get(1).isSelected());
+		assertTrue(checkList.get(2).isSelected());
+		assertTrue(checkList.get(3).isSelected());
+	}
+	
+	@Test
+	public void testCheckBoxSimple() throws InterruptedException {
+		List<WebElement> checkList = driver.findElements(By.name("chkbox"));
+		
+		assertEquals(4, checkList.size());
+
+		//Forma simples
+		checkList.get(2).click();
+		checkList.get(3).click();
+			
 	
 		assertFalse(checkList.get(0).isSelected());
 		assertFalse(checkList.get(1).isSelected());
