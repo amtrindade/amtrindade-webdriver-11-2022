@@ -183,4 +183,15 @@ public class WebElementsTest {
 		
 		assertTrue(enable);		
 	}
+	
+	@Test
+	public void testConfirm() {
+		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
+		btnConfirm.click();
+		
+		Alert confirmAlert = driver.switchTo().alert();
+		assertEquals("Pressione um botão!", confirmAlert.getText());
+		
+		confirmAlert.accept();		
+	}
 }
