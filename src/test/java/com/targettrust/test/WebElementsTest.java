@@ -194,4 +194,19 @@ public class WebElementsTest {
 		
 		confirmAlert.accept();		
 	}
+	
+	@Test
+	public void testiFrame() throws InterruptedException {				
+		//Entra no iframe
+		driver.switchTo().frame(0);
+		
+		WebElement tfiFrame = driver.findElement(By.id("tfiframe"));
+		tfiFrame.sendKeys("Automação com WebDriver");		
+		
+		assertEquals("Automação com WebDriver", tfiFrame.getAttribute("value"));
+		
+		//Volta o driver para origem
+		driver.switchTo().defaultContent();
+		
+	}
 }
