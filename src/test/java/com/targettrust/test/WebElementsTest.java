@@ -147,10 +147,25 @@ public class WebElementsTest {
 		selSingle.selectByValue("item1");
 		
 		selSingle.selectByValue("item7");
-		
-		//System.out.println(selSingle.getFirstSelectedOption().getText());
  		
 		assertEquals("Item 7", selSingle.getFirstSelectedOption().getText());		
 		assertEquals("item7", selSingle.getFirstSelectedOption().getAttribute("value"));
-	}	
+	}
+	
+	@Test
+	public void testDropDownMultiSelect() throws InterruptedException {
+		WebElement dpMulti = driver.findElement(By.name("multiselectdropdown"));
+		Select selMulti = new Select(dpMulti);
+		
+		selMulti.selectByVisibleText("Item 5");		
+		selMulti.selectByVisibleText("Item 8");
+		selMulti.selectByVisibleText("Item 9");
+					
+		List<WebElement> listSelect = selMulti.getAllSelectedOptions();
+		assertEquals(3, listSelect.size());
+		
+		assertEquals("Item 5", listSelect.get(0).getText());
+		assertEquals("Item 8", listSelect.get(1).getText());
+		assertEquals("Item 9", listSelect.get(2).getText());		
+	}
 }
