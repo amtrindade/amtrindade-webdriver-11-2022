@@ -36,15 +36,24 @@ public class RegularExpressionTest {
 		btnGerarCPF.click();
 		
 		WebElement tfNumber = driver.findElement(By.id("numero"));
-		
 		String cpfNumber = tfNumber.getAttribute("value");
 		
-		System.out.println(cpfNumber);
+		System.out.println(cpfNumber);				
 		
-		Thread.sleep(5000);
-		
-		assertTrue(cpfNumber.matches("^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$"));
-		
+		assertTrue(cpfNumber.matches("^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$"));		
 	}
 	
+	@Test
+	public void testRegularExpressionWithoutDot() {
+		
+		WebElement btnGerarCPF = driver.findElement(By.id("btn-gerar-cpf"));
+		btnGerarCPF.click();
+		
+		WebElement tfNumber = driver.findElement(By.id("numero"));
+		String cpfNumber = tfNumber.getAttribute("value");
+		
+		System.out.println(cpfNumber);				
+		
+		assertTrue(cpfNumber.matches("^[0-9]{11}$"));		
+	}		
 }
