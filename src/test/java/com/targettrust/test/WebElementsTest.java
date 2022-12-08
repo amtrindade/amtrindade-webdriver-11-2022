@@ -33,8 +33,7 @@ public class WebElementsTest {
 
 	@Test
 	public void testValidateTitle() {
-		// Valida o título da página
-		
+		// Valida o título da página		
 		String title = driver.getTitle();	
 		assertEquals("WebElements Test Page Lab", title);
 	}
