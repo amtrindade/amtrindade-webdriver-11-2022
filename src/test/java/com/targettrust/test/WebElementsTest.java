@@ -1,48 +1,39 @@
 package com.targettrust.test;
 
+import static com.targettrust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class WebElementsTest {
-	
-	private WebDriver driver;	
+import com.targettrust.core.BaseTest;
+
+public class WebElementsTest extends BaseTest{		
 
 	@Before
-	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/home/antonio/Dev/drivers/chromedriver"); 		
-		driver = new ChromeDriver();
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");
+	public void setUp() throws Exception {		
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");
 	}
-
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
-
+	
 	@Test
 	public void testValidateTitle() {
 		// Valida o título da página		
-		String title = driver.getTitle();	
+		String title = getDriver().getTitle();	
 		assertEquals("WebElements Test Page Lab", title);
 	}
 	
 	@Test
 	public void testWriteTextFieldName() throws InterruptedException {
 		//Localiza elemento
-		WebElement tfName = driver.findElement(By.name("txtbox1"));
+		WebElement tfName = getDriver().findElement(By.name("txtbox1"));
 	
 		//Interage com elemento
 		tfName.sendKeys("Antônio");	
@@ -60,8 +51,8 @@ public class WebElementsTest {
 	@Test
 	public void testValidateTextFieldEnable() throws InterruptedException {
 		//Localizar os elementos
-		WebElement tfEnable = driver.findElement(By.name("txtbox1"));
-		WebElement tfDisable = driver.findElement(By.name("txtbox2"));
+		WebElement tfEnable = getDriver().findElement(By.name("txtbox1"));
+		WebElement tfDisable = getDriver().findElement(By.name("txtbox2"));
 		
 		//Interaçao com os elementos 
 		//***NÃO PRECISA, SO A NÍVEL DE CURIOSIDADE
@@ -82,7 +73,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testRadioButton() throws InterruptedException {
-		List<WebElement> listRadio = driver.findElements(By.name("radioGroup1"));
+		List<WebElement> listRadio = getDriver().findElements(By.name("radioGroup1"));
 		
 		assertEquals(4, listRadio.size());
 		
@@ -103,7 +94,7 @@ public class WebElementsTest {
 	@Test
 	public void testCheckBoxLooping() throws InterruptedException {
 		List<WebElement> checkList = 
-				driver.findElements(By.xpath("//div[@id='box']//input[@type='checkbox']"));
+				getDriver().findElements(By.xpath("//div[@id='box']//input[@type='checkbox']"));
 		
 		assertEquals(4, checkList.size());
 		
@@ -124,7 +115,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testCheckBoxSimple() throws InterruptedException {
-		List<WebElement> checkList = driver.findElements(By.name("chkbox"));
+		List<WebElement> checkList = getDriver().findElements(By.name("chkbox"));
 		
 		assertEquals(4, checkList.size());
 
@@ -140,7 +131,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testDropDownListSingle() {
-		WebElement dpSingle = driver.findElement(By.name("dropdownlist"));		
+		WebElement dpSingle = getDriver().findElement(By.name("dropdownlist"));		
 		Select selSingle = new Select(dpSingle);
 		
 		//selSingle.selectByIndex(6);
@@ -155,7 +146,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testDropDownMultiSelect() throws InterruptedException {
-		WebElement dpMulti = driver.findElement(By.name("multiselectdropdown"));
+		WebElement dpMulti = getDriver().findElement(By.name("multiselectdropdown"));
 		Select selMulti = new Select(dpMulti);
 		
 		selMulti.selectByVisibleText("Item 5");		
@@ -172,10 +163,10 @@ public class WebElementsTest {
 	
 	@Test
 	public void testAlert() {
-		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		WebElement btnAlert = getDriver().findElement(By.name("alertbtn"));
 		btnAlert.click();
 		
-		Alert myAlert = driver.switchTo().alert();
+		Alert myAlert = getDriver().switchTo().alert();
 		assertEquals("Eu sou um alerta!", myAlert.getText());
 		
 		myAlert.dismiss();
@@ -186,10 +177,10 @@ public class WebElementsTest {
 	
 	@Test
 	public void testConfirm() {
-		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
+		WebElement btnConfirm = getDriver().findElement(By.name("confirmbtn"));
 		btnConfirm.click();
 		
-		Alert confirmAlert = driver.switchTo().alert();
+		Alert confirmAlert = getDriver().switchTo().alert();
 		assertEquals("Pressione um botão!", confirmAlert.getText());
 		
 		confirmAlert.accept();		
@@ -198,15 +189,15 @@ public class WebElementsTest {
 	@Test
 	public void testiFrame() throws InterruptedException {				
 		//Entra no iframe
-		driver.switchTo().frame(0);
+		getDriver().switchTo().frame(0);
 		
-		WebElement tfiFrame = driver.findElement(By.id("tfiframe"));
+		WebElement tfiFrame = getDriver().findElement(By.id("tfiframe"));
 		tfiFrame.sendKeys("Automação com WebDriver");		
 		
 		assertEquals("Automação com WebDriver", tfiFrame.getAttribute("value"));
 		
 		//Volta o driver para origem
-		driver.switchTo().defaultContent();
+		getDriver().switchTo().defaultContent();
 		
 	}
 }

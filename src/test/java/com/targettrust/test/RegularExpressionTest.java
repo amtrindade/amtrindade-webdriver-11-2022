@@ -1,40 +1,31 @@
 package com.targettrust.test;
 
+import static com.targettrust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class RegularExpressionTest {
+import com.targettrust.core.BaseTest;
+
+public class RegularExpressionTest extends BaseTest{
 	
-	private WebDriver driver;	
-
 	@Before
-	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "/home/antonio/Dev/drivers/chromedriver"); 		
-		driver = new ChromeDriver();
-		driver.get("https://www.geradordecpf.org/");
+	public void setUp() throws Exception {	
+		getDriver().get("https://www.geradordecpf.org/");
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
-	
 	@Test
 	public void testRegularExpressionWithDot() throws InterruptedException {
-		WebElement cbDot = driver.findElement(By.id("cbPontos"));
+		WebElement cbDot = getDriver().findElement(By.id("cbPontos"));
 		cbDot.click();
 		
-		WebElement btnGerarCPF = driver.findElement(By.id("btn-gerar-cpf"));
+		WebElement btnGerarCPF = getDriver().findElement(By.id("btn-gerar-cpf"));
 		btnGerarCPF.click();
 		
-		WebElement tfNumber = driver.findElement(By.id("numero"));
+		WebElement tfNumber = getDriver().findElement(By.id("numero"));
 		String cpfNumber = tfNumber.getAttribute("value");
 		
 		System.out.println(cpfNumber);				
@@ -45,10 +36,10 @@ public class RegularExpressionTest {
 	@Test
 	public void testRegularExpressionWithoutDot() {
 		
-		WebElement btnGerarCPF = driver.findElement(By.id("btn-gerar-cpf"));
+		WebElement btnGerarCPF = getDriver().findElement(By.id("btn-gerar-cpf"));
 		btnGerarCPF.click();
 		
-		WebElement tfNumber = driver.findElement(By.id("numero"));
+		WebElement tfNumber = getDriver().findElement(By.id("numero"));
 		String cpfNumber = tfNumber.getAttribute("value");
 		
 		System.out.println(cpfNumber);				
