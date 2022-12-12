@@ -46,7 +46,9 @@ public class CNPJRegularExpressionTest extends BaseTest{
 		
 		WebElement divCnpj = getDriver().findElement(By.id("texto_cnpj"));
 		
-		Thread.sleep(5000);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 60);
+		wait.until(ExpectedConditions
+				.invisibilityOfElementWithText(By.id("texto_cnpj"), "Gerando..."));
 		
 		String cnpjGerado = divCnpj.getText();
 		System.out.println(cnpjGerado);
