@@ -1,5 +1,7 @@
 package com.targettrust.core;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -13,8 +15,8 @@ public class DriverFactory {
 			System.setProperty("webdriver.chrome.driver", 
 					"/home/antonio/Dev/drivers/chromedriver"); 		
 			driver = new ChromeDriver();
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		}
-		
 		return driver;
 	}
 	
