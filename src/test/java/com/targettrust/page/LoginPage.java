@@ -41,6 +41,6 @@ public class LoginPage {
 	public String getMessageError() {
 		WebElement divMsgError = getDriver().findElement(By.id("errorMessage"));	
 		return divMsgError.getText();
-	}
+	}	
 
 }
