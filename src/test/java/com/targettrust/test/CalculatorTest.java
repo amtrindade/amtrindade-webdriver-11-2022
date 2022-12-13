@@ -32,7 +32,7 @@ public class CalculatorTest extends BaseTest{
 		
 		//Fazendo a espera explicita		
 		wait.until(ExpectedConditions.textToBePresentInElementValue(tfValueTwo, "4"));
-		
+						
 		WebElement btnSum = getDriver().findElement(By.id("somar"));
 		btnSum.click();
 		
