@@ -24,7 +24,7 @@ public class TaskUmovTest extends BaseTest{
 		mainPage = loginPage.login(
 				GlobalProperty.getProperty("webdriver.environment"), 
 				GlobalProperty.getProperty("webdriver.user"),  
-				"123456");	
+				"trocaraqui");	
 		taskPage = mainPage.accessTask();
 	}
 	
